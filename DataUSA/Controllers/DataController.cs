@@ -97,8 +97,8 @@ namespace DataUSA.Controllers
         {
             try
             {
-                string typeOfSearch = type.ToLower() == "biggest" ? "largest population." : "smallest population.";
-                string queryDesc = $"Requested population data for the state with the {typeOfSearch}.";
+                string typeOfSearch = type.ToLower() == "biggest" ? "largest population" : "smallest population";
+                string queryDesc = $"Requested population data for the state with the {typeOfSearch}";
                 queryDesc += year == 0 ? " in the latest available year." : $" in year {year}.";
                 PostQueryLog(queryDesc);
 
