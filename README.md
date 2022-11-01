@@ -1,23 +1,133 @@
-# backend-coding-challenge
+# Backend-coding-challenge
 
-Write a REST Api where you can query for for the difference between difference states population using: https://datausa.io/api/data?drilldowns=State&measures=Population&year=latest.
+## Project
 
-Also save all queries made with datetime in a database and provide a way to access this information.
+REST API for querying population data for differents states using:  
+https://datausa.io/api/
 
-Requirements:
-- Use .NET and SQL Server
+Also saving all queries made with datetime in a in-memory database and providing a way to access this information.
 
+---
 
+## Dependencies
 
-Results:
-- Rest API with that can return:
-- - The difference in population between two specific states, filtered by year if chosen
-- - The state with the biggest/smallest population
-- - 1 other interesting comparison/information from the dataset 
-- Some way of accessing logs of queries made
+### Frameworks
 
+| Framework | Version |
+| --------- | ------- |
+| .NETcore  | 5.0.0   |
 
-Challenge instructions:
-- Fork this repo
-- Complete the challenge (and edit the read me with installation/running instructions)
-- Email jobb@spinit.se / jens.hendar@spinit.se
+### Package dependencies
+
+| Package                                | Version |
+| -------------------------------------- | ------- |
+| Microsoft.EntityFrameworkCore.InMemory | 5.0.17  |
+| Newtonsoft.Json                        | 13.0.1  |
+| Swashbuckle.AspNetCore                 | 5.6.3   |
+
+### Project dependencies
+
+| Project    | Dependency |
+| ---------- | ---------- |
+| Contracts  | Entities   |
+| DataUSA    | Entities   |
+| DataUSA    | Repository |
+| Repository | Contracts  |
+
+---
+
+# Endpoints
+
+## Data
+
+**Get all population data.**
+
+**_Every available year_**
+
+```css
+/api/Data
+```
+
+**_Latest available year_**
+
+```css
+/api/Data?latest=true
+```
+
+#
+
+**Compare the population data for two states.**
+
+**_Latest available year_**
+
+```css
+/api/Data/StateComparison?state1=[state]&state2=[state]
+```
+
+**_Specific year_**
+
+```css
+/api/Data/StateComparison?state1=[state]&state2=[state]&year=[year]
+```
+
+**_Every available year_**
+
+```css
+/api/Data/StateComparison?state1=[state]&state2=[state]&latest=false
+```
+
+#
+
+**Get population data for the state with the biggest/smallest population.**
+
+**_Latest available year_**
+
+```css
+/api/Data/Size?type=[biggest/smallest]
+```
+
+**_Specific year_**
+
+```css
+/api/Data/Size?type=[biggest/smallest]&year=[year]
+```
+
+#
+
+**Get population data for a specific state.**
+
+**_Latest available year_**
+
+```css
+/api/Data/[state]
+```
+
+**_Specific year_**
+
+```css
+/api/Data/[state]?year=[year]
+```
+
+#
+
+**Get historic population data for a specific state.**
+
+**_All data between two specific years_**
+
+```css
+/api/Data/StateHistory?state=[state]&startYear=[year]&endYear=[year]
+```
+
+## Querylogs
+
+**Get all querylogs**
+
+```css
+/api/QueryLog
+```
+
+**Get a specific querylog by ID**
+
+```css
+/api/QueryLog/[id]
+```
