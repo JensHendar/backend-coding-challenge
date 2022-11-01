@@ -28,7 +28,10 @@ namespace DataUSA
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
+            services.ConfigureInMemoryDatabase();
+            services.ConfigureScope();
             services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DataUSA", Version = "v1" });
@@ -56,5 +59,10 @@ namespace DataUSA
                 endpoints.MapControllers();
             });
         }
+
+        //public override void Seed(Repository.QueryLogRepository repository)
+        //{
+
+        //}
     }
 }

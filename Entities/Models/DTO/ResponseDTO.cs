@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Models.DTO
 {
-    internal class ResponseDTO
+    public class ResponseDTO
     {
         public string State { get; set; }
-        public int IDYear { get; set; }
-        public string Year { get; set; }
+        public int Year { get; set; }
         public int Population { get; set; }
     }
 }
