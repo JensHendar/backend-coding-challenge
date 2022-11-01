@@ -1,3 +1,4 @@
+using DataUSA.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,8 +27,11 @@ namespace DataUSA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.ConfigureCors();
+            services.ConfigureInMemoryDatabase();
+            services.ConfigureScope();
             services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DataUSA", Version = "v1" });
@@ -55,5 +59,10 @@ namespace DataUSA
                 endpoints.MapControllers();
             });
         }
+
+        //public override void Seed(Repository.QueryLogRepository repository)
+        //{
+
+        //}
     }
 }
