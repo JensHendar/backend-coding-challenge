@@ -29,7 +29,7 @@ namespace DataUSA.Controllers
         }
 
         // GET: api/<DataController>
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IEnumerable<ResponseDTO>> Get(bool latest = false)
         {
             string queryDesc = "Requested all data.";
@@ -134,8 +134,8 @@ namespace DataUSA.Controllers
 
             return (from d in data.data
                     where d.SlugState == state.ToLower()
-                    && d.IDYear == startYear
-                    && d.IDYear == endYear
+                    && (d.IDYear >= startYear
+                    && d.IDYear <= endYear)
                     select new ResponseDTO()
                     {
                         State = d.State,
